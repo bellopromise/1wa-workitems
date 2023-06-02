@@ -1,6 +1,7 @@
 package com.example.workitem.messaging;
 
 
+import com.example.workitem.config.RabbitMQProperties;
 import org.springframework.amqp.core.AmqpAdmin;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
@@ -18,13 +19,20 @@ public class RabbitMQConfig {
 
     private static final String QUEUE_NAME = "work-item-queue";
 
+    private  final RabbitMQProperties rabbitMQProperties;
+
+
+    public RabbitMQConfig(RabbitMQProperties rabbitMQProperties) {
+        this.rabbitMQProperties = rabbitMQProperties;
+    }
+
     @Bean
     public ConnectionFactory connectionFactory() {
         CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
-        connectionFactory.setHost("localhost");
-        connectionFactory.setPort(5672);
-        connectionFactory.setUsername("guest");
-        connectionFactory.setPassword("guest");
+        connectionFactory.setHost(rabbitMQProperties.getHost());
+        connectionFactory.setPort(rabbitMQProperties.getPort());
+        connectionFactory.setUsername(rabbitMQProperties.getUsername());
+        connectionFactory.setPassword(rabbitMQProperties.getPassword());
         return connectionFactory;
     }
 
@@ -57,6 +65,8 @@ public class RabbitMQConfig {
     public AmqpAdmin amqpAdmin(ConnectionFactory connectionFactory) {
         return new RabbitAdmin(connectionFactory);
     }
+
+
 
 }
 
