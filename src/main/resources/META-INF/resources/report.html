@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Work Item Report</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .button-container button {
+            margin: 0 5px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .button-container button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<h1>Work Item Report</h1>
+<div id="container">
+    <div id="report"></div>
+    <div class="button-container">
+        <button onclick="refreshReport()">Refresh</button>
+        <button onclick="downloadPdfReport()">Download PDF</button>
+    </div>
+</div>
+
+<script>
+    function downloadPdfReport() {
+        window.location.href = "work-items/report-pdf";
+    }
+
+    function refreshReport() {
+        $.getJSON("/work-items/report", function (data) {
+            var reportData = data.reportData;
+            var report = "<table>";
+            report += "<tr><th>Value</th><th>Total Items</th><th>Processed Items</th></tr>";
+
+            for (var key in reportData) {
+                if (reportData.hasOwnProperty(key)) {
+                    var value = key;
+                    var total = reportData[key].totalItems;
+                    var processed = reportData[key].processedItems;
+                    report += "<tr><td>" + value + "</td><td>" + total + "</td><td>" + processed + "</td></tr>";
+                }
+            }
+
+            report += "</table>";
+
+            $("#report").html(report);
+        });
+    }
+
+    $(document).ready(function () {
+        refreshReport();
+    });
+</script>
+</body>
+</html>
