@@ -2,7 +2,7 @@
 
 ## Description
 
-Hello, this is my solution to the coding test. This component exposes a REST api with different endpoints for creating and processing of work items.  This was built using [Spring Boot](https://spring.io/projects/spring-boot/) framework, [rabbitmq](https://www.rabbitmq.com/) for producing and consuming messages, and [Mongo](https://www.mongodb.com/atlas/database) for database storage, [Jasper Reports](https://www.jaspersoft.com/), and [junit](https://junit.org/) for unit and E2E tests.
+Hello, this is my solution to the coding test. This component exposes a REST api with different endpoints for creation, retrieval, and processing of work items.  This was built using [Spring Boot](https://spring.io/projects/spring-boot/) framework, [rabbitmq](https://www.rabbitmq.com/) for producing and consuming messages, and [Mongo](https://www.mongodb.com/atlas/database) for database storage, [Jasper Reports](https://www.jaspersoft.com/), and [junit](https://junit.org/) for unit and E2E tests.
 
 ## Prerequisites
 
