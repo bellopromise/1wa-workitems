@@ -1,7 +1,9 @@
 package com.example.workitem.messaging;
 
+import com.example.workitem.config.RabbitMQProperties;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -18,8 +20,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import java.lang.reflect.Field;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class RabbitMQConfigTest {
@@ -30,15 +31,16 @@ public class RabbitMQConfigTest {
     @Mock
     private ThreadPoolTaskExecutor taskExecutorMock;
 
+
+    @InjectMocks
+    private RabbitMQConfig rabbitMQConfig;
+
     @Mock
     private AmqpAdmin amqpAdminMock;
 
 
     @Test
     public void rabbitListenerContainerFactory_Configuration_Success() throws Exception {
-        // Arrange
-        RabbitMQConfig rabbitMQConfig = new RabbitMQConfig();
-
         // Act
         SimpleRabbitListenerContainerFactory factory = rabbitMQConfig.rabbitListenerContainerFactory(connectionFactoryMock, taskExecutorMock);
 
@@ -48,10 +50,9 @@ public class RabbitMQConfigTest {
         assertEquals(2, getFieldValue(factory, "maxConcurrentConsumers"));
     }
 
+
     @Test
     public void template_Configuration_Success() {
-        // Arrange
-        RabbitMQConfig rabbitMQConfig = new RabbitMQConfig();
 
         // Act
         RabbitTemplate rabbitTemplate = rabbitMQConfig.template(connectionFactoryMock);
@@ -65,7 +66,6 @@ public class RabbitMQConfigTest {
     @Test
     public void workItemQueue_Configuration_Success() {
         // Arrange
-        RabbitMQConfig rabbitMQConfig = new RabbitMQConfig();
         RabbitAdmin rabbitAdminMock = mock(RabbitAdmin.class);
         rabbitMQConfig.amqpAdmin(connectionFactoryMock);
 

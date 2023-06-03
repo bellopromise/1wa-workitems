@@ -22,9 +22,12 @@ public class RabbitMQConfig {
     private  final RabbitMQProperties rabbitMQProperties;
 
 
+
     public RabbitMQConfig(RabbitMQProperties rabbitMQProperties) {
         this.rabbitMQProperties = rabbitMQProperties;
     }
+
+
 
     @Bean
     public ConnectionFactory connectionFactory() {
