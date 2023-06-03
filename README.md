@@ -1,8 +1,8 @@
-# Bayzat Takehome Assignment
+# One World Accuracy Takehome Assignment
 
 ## Description
 
-Hello, this is my solution to the coding test. This component exposes a REST api with different endpoints for creation, retrieval, and processing of work items.  This was built using [Spring Boot](https://spring.io/projects/spring-boot/) framework, [rabbitmq](https://www.rabbitmq.com/) for producing and consuming messages, and [Mongo](https://www.mongodb.com/atlas/database) for database storage, [Jasper Reports](https://www.jaspersoft.com/), and [junit](https://junit.org/) for unit and E2E tests.
+Hello, this is my solution to the coding test. This component exposes a REST api with different endpoints for creating, retrieval and processing of work items.  This was built using [Spring Boot](https://spring.io/projects/spring-boot/) framework, [rabbitmq](https://www.rabbitmq.com/) for producing and consuming messages, and [Mongo](https://www.mongodb.com/atlas/database) for database storage, [Jasper Reports](https://www.jaspersoft.com/), and [junit](https://junit.org/) for unit and E2E tests.
 
 ## Prerequisites
 
@@ -17,6 +17,7 @@ Hello, this is my solution to the coding test. This component exposes a REST api
 
 ```sh
 $ git clone https://github.com/bellopromise/1wa-workitems # or clone your own fork
+$ cd path/to/directory //
 $ git checkout main
 ```
 ### Using manual download ZIP
@@ -56,11 +57,6 @@ $ ./gradlew test jacocoTestReport
 ```
 
 
-### View And Download Report
-
-- Visit `http://localhost:8080/work-items/report.html` to view the report.
-- It allows you to refresh and download the pdf of the report
-
 ## API documentation
 
 #### Postman
@@ -81,7 +77,7 @@ Once there, you'll be able to see all of the available endpoints, as well as det
 ## API Endpoint
 The API endpoints for this solution will be structured as follows:
 
-#### Person
+#### Work Items
 - GET /work-items
   * Retrieves a list of all work items.
 - GET /work-items/{id}
@@ -112,6 +108,11 @@ The API endpoints for this solution will be structured as follows:
   * Gets the report of work items with each value, total items and the processed items.
 - GET /work-items/report-pdf
   * Downloads the report of work items.
+
+## View And Download Report
+
+- Visit `http://localhost:8080/report.html` to view the report.
+- It also allows you to refresh and download the pdf of the report
 
 
 ## How to use Postman to queue the tool items
